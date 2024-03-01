@@ -1,6 +1,7 @@
 // START IN lib.rs!
 
 use aquarium::Dolphin;
+use anyhow::Result;
 // Silence some warnings so they don't distract from the exercise.
 #[allow(clippy::vec_init_then_push)]
 
@@ -11,23 +12,29 @@ use aquarium::Dolphin;
 // - Have the play_time function return a `Result<Vec<String>>`. The vector of Strings will
 //   represent successful outcomes of various dolphin tricks.
 
-// fn play_time(dolphin: &Dolphin) -> ... {
-//     let mut responses = vec![];
-//     // 2b. Call the .say_your_name() method on `dolphin`, use `?` to unwrap the value, and push
-//     // the value onto the `responses` vector.
-//     //
-//     // let response = ...    // this can be done with an intermediate variable...
-//     // responses.push( ... ) // ...or all on one line. Either way is fine!
-//     //
-//     // 2c. Do the same thing as #2b for the .flip() method
-//     //
-//     // 2d. Do the same thing as #2b for the .shake_hands() method
-//
-//     Ok(responses)
-// }
+fn play_time(dolphin: &Dolphin) -> Result<Vec<String>> {
+    let mut responses = vec![];
+    // 2b. Call the .say_your_name() method on `dolphin`, use `?` to unwrap the value, and push
+    // the value onto the `responses` vector.
+    //
+    responses.push(dolphin.say_your_name()?);
+    //
+    // 2c. Do the same thing as #2b for the .flip() method
+    responses.push(dolphin.flip()?);
+    //
+    // 2d. Do the same thing as #2b for the .shake_hands() method
+    responses.push(dolphin.shake_hands()?);
 
-fn main() {
+    Ok(responses)
+}
+
+fn main() -> Result<()> {
     let dolphins = vec![
+        Dolphin {
+            name: "Devin".into(),
+            age: 6,
+            hungry: false,
+        },
         Dolphin {
             name: "Augustinius".into(),
             age: 7,
@@ -42,11 +49,6 @@ fn main() {
             name: "Carson".into(),
             age: 5,
             hungry: true,
-        },
-        Dolphin {
-            name: "Devin".into(),
-            age: 6,
-            hungry: false,
         },
     ];
     for dolphin in &dolphins {
@@ -66,5 +68,14 @@ fn main() {
             }
             Err(e) => println!("{} can't perform today: {}", dolphin.name, e.to_string()),
         }
+        /*
+        let responses = play_time(dolphin)?;
+        println!("{} did a FABULOUS PERFORMANCE!", dolphin.name);
+        for response in responses {
+            println!("  {}", response);
+        }
+         */
     }
+
+    Ok(())
 }
