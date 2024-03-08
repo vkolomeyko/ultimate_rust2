@@ -1,5 +1,6 @@
 pub fn sploosh(x: i32, y: i32, z: i32) -> i32 {
     match (x, y, z) {
+        (8, 9, 10) => 7,
         (x, _, _) if x < 0 => 99,
         (1, 2, 3) => 4,
         (5, 6, 7) => 3,
@@ -19,10 +20,10 @@ mod test {
 
     // 2. Bring all the library items into scope with a `use` statement
     // Hint: It's okay to use `*` here.
-    
+
     // 3. Write a test function that verifies the following condition using the `assert_eq!` or
     // `assert_ne!` macros
-    
+
     #[test]
     fn my_test() {
         // - sploosh(1, 2, 3) returns 4
@@ -33,11 +34,11 @@ mod test {
         // - sploosh(5, 6, 7) does not return 4
         assert_ne!(4, sploosh(5, 6, 7))
     }
-        
+
     #[test]
     fn my_test3() {
         // - If you pass sploosh a negative number for the first argument, 99 is returned
-        assert_eq!(99, sploosh(-1, 2, 3))        
+        assert_eq!(99, sploosh(-1, 2, 3))
     }
         //
         // `cargo test` should run your tests and pass
@@ -47,11 +48,11 @@ mod test {
     #[test]
     fn my_test4() {
         // - splish(100, 10) is negative
-        assert!(splish(100, 10) < 0);    
+        assert!(splish(100, 10) < 0);
         // - splish(40, 20) is positive
         assert!(splish(40, 20) > 0);
         // - splish(9, 3) is 0
-        assert!(splish(9, 3) == 0)    
+        assert!(splish(9, 3) == 0)
     }
 }
 
